@@ -18,65 +18,54 @@
 
 #include <iomanip>
 
+#include <string.h>
+
 #define FAILED_ -1
 
 #define SUCCESS 0
-
-#define SUCCESS_MSG "ALL OK"
-
-#define FAILURE_MSG "NOT OK"
 
 #define MSG_SIZE 6
 
 #define MAX_CONNECTIONS 20
 
-#define MAX_NAME_LENGTH 100
-
 #define DEFAULT_IP "127.0.0.1"
 
 using namespace std;
 
-typedef struct Data 
-    
-  {
-  
-  int choice;
-  long number;
-  char name[MAX_NAME_LENGTH];
-   }data;
-
 class SocketServer
-    {
-     public:
+{
+public:
 
-  SocketServer(int port=8080):port(port) {}
+  SocketServer(int port=5000):port(port) {}
 
   ~SocketServer() {};
 
   void getinfo(){cout<<this->port<<endl;}
 
- int CreateSocket();
+  int CreateSocket();
 
- int Bind();
+  int Bind();
 
-int Listen();
+  int Listen();
 
-void Accept();
+  void Accept();
 
-void ReceiveAndClose();
+  void ReceiveAndClose();
 
-  private:
+private:
 
- int port;
+  int port;
 
- int socket_fd;
+  int socket_fd;
 
-int data_socket_fd;
+  int data_socket_fd;
 
-struct sockaddr_in serv_addr;
+  struct sockaddr_in serv_addr;
 
- data Data;
+  char msg[1024];
 
-   };
+  int msgsize = 1024; 
+
+};
 
 #endif 
